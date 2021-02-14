@@ -9,6 +9,18 @@ dotenv.config();
 // First method: Apply for authentication when establishing a connection.
 const api_key = process.env.api_key;
 const secret = process.env.secret;
+// const timestamp = Date.now();
+// const symbol = "BTCUSDT";
+// const query = `api_key=${api_key}&symbol=${symbol}&timestamp=${timestamp}`;
+// // const sign = crypto.createHmac("sha256", secret).update(query).digest("hex");
+// axios
+//   .get("http://api-testnet.bybit.com/public/linear/risk-limit?symbol=BTCUSDT")
+//   .then((res) => {
+//     console.log(res.data);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 const wsUrl = "wss://stream-testnet.bybit.com/realtime_private";
 // A UNIX timestamp after which the request become invalid. This is to prevent replay attacks.
@@ -40,13 +52,13 @@ ws.on("message", (msg) => {
   console.log("----------------^^^^^^^^^^^^^^^^^^^^^^-------------------", msg);
 });
 
-// ws.on("update", function (message) {
-//   console.log("update", message);
-// });
+ws.on("update", function (message) {
+  console.log("update^^^^^^^^^^^^^^", message);
+});
 
-// ws.on("response", function (response) {
-//   console.log("response", response);
-// });
+ws.on("response", function (response) {
+  console.log("response", response);
+});
 
 ws.on("close", function () {
   console.log("connection closed " + new Date());
