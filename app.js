@@ -36,10 +36,10 @@ const signature = crypto
 const param = `api_key=${api_key}&expires=${expires}&signature=${signature}`
 
 // Establishing connection
- const ws = new WebSocket(wsUrl + '?' + param)
+const ws = new WebSocket(wsUrl + '?' + param)
 ws.on('open', () => {
     console.log('opend ' + new Date())
-     ws.send('{"op": "subscribe", "args": ["stop_order"]}')
+    ws.send('{"op": "subscribe", "args": ["stop_order"]}')
     ws.send('{"op": "subscribe", "args": ["execution"]}')
     ws.send('{"op": "subscribe", "args": ["order"]}')
     ws.send('{"op": "subscribe", "args": ["position"]}')
